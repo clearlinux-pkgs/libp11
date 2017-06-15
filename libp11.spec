@@ -4,7 +4,7 @@
 #
 Name     : libp11
 Version  : 0.4.6
-Release  : 2
+Release  : 3
 URL      : https://github.com/OpenSC/libp11/releases/download/libp11-0.4.6/libp11-0.4.6.tar.gz
 Source0  : https://github.com/OpenSC/libp11/releases/download/libp11-0.4.6/libp11-0.4.6.tar.gz
 Summary  : libp11
