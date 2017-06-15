@@ -10,6 +10,9 @@ Source0  : https://github.com/OpenSC/libp11/releases/download/libp11-0.4.6/libp1
 Summary  : libp11
 Group    : Development/Tools
 License  : LGPL-2.1
+Requires: libp11-lib
+Requires: libp11-doc
+BuildRequires : doxygen
 BuildRequires : pkgconfig(libcrypto)
 BuildRequires : sed
 
@@ -20,6 +23,32 @@ This directory contains some example code how to use libp11.
 Feel free to use this code in any way, it is public domain,
 not copyrighted.
 
+%package dev
+Summary: dev components for the libp11 package.
+Group: Development
+Requires: libp11-lib
+Provides: libp11-devel
+
+%description dev
+dev components for the libp11 package.
+
+
+%package doc
+Summary: doc components for the libp11 package.
+Group: Documentation
+
+%description doc
+doc components for the libp11 package.
+
+
+%package lib
+Summary: lib components for the libp11 package.
+Group: Libraries
+
+%description lib
+lib components for the libp11 package.
+
+
 %prep
 %setup -q -n libp11-0.4.6
 
@@ -28,7 +57,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1496644950
+export SOURCE_DATE_EPOCH=1497485159
 %configure --disable-static
 make V=1  %{?_smp_mflags}
 
@@ -40,18 +69,26 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 make VERBOSE=1 V=1 %{?_smp_mflags} check
 
 %install
-export SOURCE_DATE_EPOCH=1496644950
+export SOURCE_DATE_EPOCH=1497485159
 rm -rf %{buildroot}
 %make_install
 
 %files
 %defattr(-,root,root,-)
-/usr/include/libp11.h
+
+%files dev
+%defattr(-,root,root,-)
+/usr/include/*.h
+/usr/lib64/libp11.so
+/usr/lib64/pkgconfig/libp11.pc
+
+%files doc
+%defattr(-,root,root,-)
+%doc /usr/share/doc/libp11/*
+
+%files lib
+%defattr(-,root,root,-)
 /usr/lib64/engines/libpkcs11.so
 /usr/lib64/engines/pkcs11.so
-/usr/lib64/libp11.so
 /usr/lib64/libp11.so.2
 /usr/lib64/libp11.so.2.4.6
-/usr/lib64/pkgconfig/libp11.pc
-/usr/share/doc/libp11/NEWS
-
